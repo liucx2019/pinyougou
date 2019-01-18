@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;applicationContext-dao.xml&apos; to &apos;spring&apos;&#x0D;&#x0A;- Original project: &apos;pinyougou-dao&apos;&#x0D;&#x0A;- Destination element: &apos;spring&apos;&#x0D;&#x0A;- Original element: &apos;applicationContext-dao.xml&apos;" description="Copy file" element1="src/main/resources/spring/applicationContext-dao.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1547540884637" target="/pinyougou-solr-util/src/main/resources/spring" units="0" version="1.0"/>
+</session>

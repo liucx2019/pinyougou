@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;pinyougou-solr-util/src/main/resources/spring/applicationContext-dao.xml&apos; to &apos;applicationContext.xml&apos;" description="Rename resource &apos;applicationContext-dao.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/spring/applicationContext-dao.xml" name="applicationContext.xml" stamp="1547541138932" updateReferences="true"/>
+</session>

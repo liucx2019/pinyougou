@@ -1,0 +1,8 @@
+eclipse.m2.WorkspacelifecycleMappingsLocation=G\:/pinyougou/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml
+eclipse.m2.defaultRuntime=maven_repository
+eclipse.m2.globalSettingsFile=I\:\\maven\\apache-maven-3.5.2\\conf\\settings.xml
+eclipse.m2.runtimes=maven_repository
+eclipse.m2.runtimesNodes/maven_repository/location=I\:\\maven\\apache-maven-3.5.2
+eclipse.m2.runtimesNodes/maven_repository/type=EXTERNAL
+eclipse.m2.userSettingsFile=I\:\\maven\\apache-maven-3.5.2\\conf\\settings.xml
+eclipse.preferences.version=1

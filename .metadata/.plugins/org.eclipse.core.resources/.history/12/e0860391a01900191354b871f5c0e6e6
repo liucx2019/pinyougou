@@ -1,0 +1,153 @@
+package com.pinyougou.search.service.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.core.query.Criteria;
+import org.springframework.data.solr.core.query.GroupOptions;
+import org.springframework.data.solr.core.query.HighlightOptions;
+import org.springframework.data.solr.core.query.HighlightQuery;
+import org.springframework.data.solr.core.query.Query;
+import org.springframework.data.solr.core.query.SimpleHighlightQuery;
+import org.springframework.data.solr.core.query.SimpleQuery;
+import org.springframework.data.solr.core.query.result.GroupEntry;
+import org.springframework.data.solr.core.query.result.GroupPage;
+import org.springframework.data.solr.core.query.result.GroupResult;
+import org.springframework.data.solr.core.query.result.HighlightEntry;
+import org.springframework.data.solr.core.query.result.HighlightPage;
+
+import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
+import com.pinyougou.pojo.TbItem;
+import com.pinyougou.search.service.ItemSearchService;
+
+@Service(timeout = 3000)
+public class ItemSearchServiceImpl implements ItemSearchService {
+
+	@Autowired
+	private SolrTemplate solrTemplate;
+	
+	@Autowired
+	private RedisTemplate redisTemplate; 
+	
+	/**
+	 * 查询品牌和规格列表
+	 * @param category
+	 * @return
+	 */
+	private Map searchBrandAndSpecList(String category) {
+		Map map = new HashMap();
+		Long typeId=(Long)redisTemplate.boundHashOps("itemCat").get(category);//获取模板id
+		
+		if(typeId!=null) {
+			//根据模板 ID 查询品牌列表
+			List brandList=(List) redisTemplate.boundHashOps("brandList").get(typeId);
+			map.put("brandList", brandList);//返回值添加品牌列表
+			
+			//根据模板 ID 查询规格列表
+			List specList =(List)redisTemplate.boundHashOps("specList").get(typeId);
+			map.put("specList", specList);
+			
+		}
+		
+		return map;
+		
+	}
+	
+	
+
+	@Override
+	public Map<String, Object> search(Map searchMap) {
+
+		Map<String, Object> map = new HashedMap();
+
+		/*
+		 * Query query = new SimpleQuery("*:*");
+		 * 
+		 * // 添加查询条件 Criteria criteria = new
+		 * Criteria("item_keywords").is(searchMap.get("keywords"));
+		 * query.addCriteria(criteria);
+		 * 
+		 * ScoredPage<TbItem> page = solrTemplate.queryForPage(query, TbItem.class);
+		 * 
+		 * map.put("rows", page.getContent());
+		 */
+
+		// 1.查询列表
+		map.putAll(searchList(searchMap));
+		// 2.根据关键字查询商品分类
+		List categoryList = searchCategoryList(searchMap);
+		map.put("categoryList", categoryList);
+		return map;
+	}
+
+	public Map searchList(Map searchMap) {
+
+		Map<String, Object> map = new HashedMap();
+
+		HighlightQuery query = new SimpleHighlightQuery();
+		HighlightOptions highlightOptions = new HighlightOptions().addField("item_title");// 设置高亮的域
+
+		highlightOptions.setSimplePrefix("<em style='color:red'>"); // 高亮前缀
+		highlightOptions.setSimplePostfix("</em>");// 高亮后缀
+		query.setHighlightOptions(highlightOptions);// 设置高亮选项
+
+		// 按照关键字查询
+		Criteria criteria = new Criteria("item_keywords").is(searchMap.get("keywords"));
+		query.addCriteria(criteria);
+
+		HighlightPage<TbItem> highlightPage = solrTemplate.queryForHighlightPage(query, TbItem.class);
+
+		System.out.println(JSON.toJSONString(highlightPage));
+		// List<HighlightEntry<TbItem>> highlighted = highlightPage.getHighlighted();
+		for (HighlightEntry<TbItem> h : highlightPage.getHighlighted()) {// 循环高亮入口集合
+			TbItem item = h.getEntity();// 获取原实体类
+
+			if (h.getHighlights().size() > 0 && h.getHighlights().get(0).getSnipplets().size() > 0) {
+				item.setTitle(h.getHighlights().get(0).getSnipplets().get(0));// 设置高亮的结果
+			}
+		}
+
+		map.put("rows", highlightPage.getContent());
+
+		return map;
+	}
+
+	public List searchCategoryList(Map searchMap) {
+
+		List<String> list = new ArrayList<>();
+
+		Query query = new SimpleQuery();
+		// 按照关键字查询
+		Criteria criteria = new Criteria("item_keywords").is(searchMap.get("keywords"));
+		query.addCriteria(criteria);
+
+		// 设置分组选项 select * from * where groupby item_category
+		GroupOptions groupOptions = new GroupOptions().addGroupByField("item_category");
+		query.setGroupOptions(groupOptions);
+		// 得到分组页
+		GroupPage<TbItem> groupPage = solrTemplate.queryForGroupPage(query, TbItem.class);
+		// 根据列得到分组结果集
+		GroupResult<TbItem> result = groupPage.getGroupResult("item_category");
+		// 得到分组结果入口页
+		System.out.println(JSON.toJSONString(result));
+		Page<GroupEntry<TbItem>> groupEntries = result.getGroupEntries();
+		System.out.println(JSON.toJSONString(groupEntries));
+		// 得到分组入口集合
+		List<GroupEntry<TbItem>> content = groupEntries.getContent();
+
+		for (GroupEntry<TbItem> entry : content) {
+			list.add(entry.getGroupValue());// 将分组结果的名称封装到返回值中
+		}
+
+		return list;
+	}
+
+}

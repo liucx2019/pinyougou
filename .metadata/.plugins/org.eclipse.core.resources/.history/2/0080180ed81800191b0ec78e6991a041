@@ -1,0 +1,38 @@
+package com.pinyougou.search.service.impl;
+
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.core.query.Criteria;
+import org.springframework.data.solr.core.query.Query;
+import org.springframework.data.solr.core.query.SimpleQuery;
+import org.springframework.data.solr.core.query.result.ScoredPage;
+
+import com.pinyougou.search.service.ItemSearchService;
+
+public class ItemSearchServiceImpl implements ItemSearchService {
+
+	@Autowired
+	private SolrTemplate solrTemplate;
+
+	@Override
+	public Map<String, Object> search(Map searchMap) {
+
+		Map<String, Object> map = new HashedMap();
+
+		Query query = new SimpleQuery("*:*");
+
+		// 添加查询条件
+		Criteria criteria = new Criteria("item_keywords").is(searchMap.get("keywords"));
+		query.addCriteria(criteria);
+
+		ScoredPage<Map> page = solrTemplate.queryForPage(query, Map.class);
+
+		map.put("rows", page.getContent());
+
+		return map;
+	}
+
+}

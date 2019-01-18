@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="com.itheima"/>
+			<item value="com.itheima.demo"/>
+			<item value="cn.itcast"/>
+			<item value="com.pinyougou"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="pinyougou-search-web"/>
+			<item value="pinyougou-parent"/>
+			<item value="pinyougou-search-service"/>
+			<item value="pinyougou-search-interface"/>
+			<item value="pinyougou-solr-util"/>
+			<item value="SpringDataSolrDemo"/>
+			<item value="SpringDataRedisDemo"/>
+			<item value="pinyougou-portal-web"/>
+			<item value="com.pinyougou.content.service.impl"/>
+			<item value="pinyougou-content-service"/>
+			<item value="pinyougou-content-interface"/>
+			<item value="fastDFS-demo"/>
+			<item value="spring-security-demo"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.wizards.MavenProjectSelectionDialog">
+		<item value="480" key="width"/>
+		<item value="506" key="x"/>
+		<item value="46" key="y"/>
+		<item value="533" key="height"/>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.dialogs.MavenRepositorySearchDialog">
+		<item value="480" key="width"/>
+		<item value="791" key="x"/>
+		<item value="138" key="y"/>
+		<item value="590" key="height"/>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item value="All Catalogs" key="catalog"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenModuleWizardParentPage">
+		<list key="moduleName">
+			<item value="pinyougou-search-web"/>
+			<item value="pinyougou-search-service"/>
+			<item value="pinyougou-search-interface"/>
+			<item value="pinyougou-solr-util"/>
+			<item value="pinyougou-portal-web"/>
+			<item value="com.pinyougou.content.service.impl"/>
+			<item value="pinyougou-content-service"/>
+			<item value="pinyougou-content-interface"/>
+			<item value="pinyougou-manager-web"/>
+			<item value="pinyougou-shop-web"/>
+			<item value="pinyougou-sellergoods-service"/>
+			<item value="pinyougou-sellergoods-interface"/>
+			<item value="pinyougou-dao"/>
+			<item value="pinyougou-common"/>
+			<item value="pinyougou-pojo"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="G:\pinyougou\spring-security-demo"/>
+			<item value="G:\逆向工程\generatorSqlmapCustom"/>
+			<item value="G:\pinyougou\pinyougou-parent\pinyougou-sellergoods-service"/>
+			<item value="G:\pinyougou\pinyougou-parent\pinyougou-shop-web"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+			<item value="org.pinyougou.search.web"/>
+		</list>
+		<list key="groupId">
+			<item value="com.itheima"/>
+		</list>
+		<list key="artifactId">
+			<item value="pinyougou-search-web"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+</section>
